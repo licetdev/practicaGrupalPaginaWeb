@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Biblioteca</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+  <div class="app">
+
+    <!-- ========== MENÚ IZQUIERDO (Siempre visible) ========== -->
+    <div class="panel-menu">
+      <h1>📚 Mi Biblioteca</h1>
+      
+      <h2>🔍 Filtros</h2>
+      <button class="filtro activo" data-filtro="todos">📖 Todos <span id="badgeTodos">0</span></button>
+      <button class="filtro" data-filtro="pendientes">⏳ Por leer <span id="badgePendientes">0</span></button>
+      <button class="filtro" data-filtro="leyendo">👓 Leyendo <span id="badgeLeyendo">0</span></button>
+      <button class="filtro" data-filtro="leidos">✅ Leídos <span id="badgeLeidos">0</span></button>
+
+      <h2>⚙️ Acciones</h2>
+      <button class="accion" id="btnLimpiarLeidos">🧹 Quitar leídos</button>
+      <button class="accion peligro" id="btnEliminarTodos">🗑️ Vaciar biblioteca</button>
+
+      <p id="contadorMenu">0 libros en total</p>
+    </div>
+
+    <!-- ========== ZONA DERECHA ========== -->
+    <div class="zona-derecha">
+
+      <!-- Formulario para agregar -->
+      <div class="formulario-agregar">
+        <input type="text" id="inputTitulo" placeholder="Título del libro...">
+        <input type="text" id="inputAutor" placeholder="Autor...">
+        <select id="selectEstado">
+          <option value="pendiente">⏳ Por leer</option>
+          <option value="leyendo">👓 Leyendo</option>
+          <option value="leido">✅ Leído</option>
+        </select>
+        <button id="btnAgregar">➕ Agregar</button>
+      </div>
+
+      <!-- MENSAJE SI NO HAY LIBROS -->
+      <div class="mensaje-vacio" id="mensajeVacio">
+        Aún no hay libros. ¡Agrega uno arriba para ver los apartados!
+      </div>
+
+      <!-- LOS DOS APARTADOS (Ocultos hasta que haya libros) -->
+      <div class="paneles" id="paneles" style="display: none;">
+        
+        <!-- APARTADO 1: FILTRAR (dentro de la zona derecha) -->
+        <div class="apartado-filtros">
+          <h2>🔍 Filtrar agregados</h2>
+          <div class="botones-filtro">
+            <button class="btn-apartado activo" data-filtro="todos">Todos</button>
+            <button class="btn-apartado" data-filtro="pendientes">Por leer</button>
+            <button class="btn-apartado" data-filtro="leyendo">Leyendo</button>
+            <button class="btn-apartado" data-filtro="leidos">Leídos</button>
+          </div>
+        </div>
+
+        <!-- APARTADO 2: LISTAR -->
+        <div class="apartado-listado">
+          <div class="cabecera-listado">
+            <h2 id="tituloSeccion">📖 Listado de libros</h2>
+            <span id="contador">0 libros</span>
+          </div>
+          <ul id="listaLibros"></ul>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="/js/script.js"></script>
+</body>
+</html>

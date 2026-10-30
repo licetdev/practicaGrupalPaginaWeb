@@ -1,0 +1,421 @@
+/* ===== Reset básico ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+}
+
+body {
+  /* Fondo general casi negro */
+  background: #09090b; 
+  padding: 30px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  color: #e4e4e7; 
+}
+
+/* ===== Contenedor principal ===== */
+.app {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  max-width: 1100px;
+  background: #121214; /* Fondo de la app */
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.05); 
+  overflow: hidden;
+}
+
+/* ================================================
+   MENÚ IZQUIERDO
+   ================================================ */
+.panel-menu {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  background: #09090b; /* Negro puro para el menú */
+  padding: 24px 16px;
+  gap: 8px;
+  flex-shrink: 0;
+  border-right: 1px solid #27272a;
+}
+
+.panel-menu h1 {
+  font-size: 20px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #27272a;
+  color: #00efff; /* Cian neón */
+  text-shadow: 0 0 10px rgba(0, 239, 255, 0.3);
+}
+
+.panel-menu h2 {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #71717a; 
+  margin-top: 16px;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.filtro, .accion {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px;
+  background: transparent;
+  color: #a1a1aa;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filtro:hover, .accion:hover { 
+  background: #18181b; 
+  color: #e4e4e7;
+}
+
+.filtro.activo {
+  background: #00efff; /* Cian neón */
+  color: #09090b;
+  font-weight: 700;
+  box-shadow: 0 0 15px rgba(0, 239, 255, 0.4); /* Resplandor neón */
+}
+
+.filtro span {
+  margin-left: auto;
+  background: #27272a;
+  color: #a1a1aa;
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: bold;
+}
+
+.filtro.activo span {
+  background: #09090b;
+  color: #00efff;
+}
+
+.accion.peligro:hover { 
+  background: #ff003c; /* Rojo neón para eliminar */
+  color: #ffffff; 
+  box-shadow: 0 0 15px rgba(255, 0, 60, 0.4);
+}
+
+#contadorMenu {
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid #27272a;
+  font-size: 13px;
+  text-align: center;
+  color: #52525b;
+}
+
+/* ================================================
+   ZONA DERECHA
+   ================================================ */
+.zona-derecha {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 24px;
+  gap: 20px;
+  min-width: 0;
+  background: #121214; 
+}
+
+/* Formulario */
+.formulario-agregar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  background: #18181b;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid #27272a;
+}
+
+.formulario-agregar input,
+.formulario-agregar select {
+  padding: 10px 14px;
+  border: 1px solid #27272a;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.2s;
+  background: #09090b;
+  color: #e4e4e7;
+}
+
+.formulario-agregar input:focus,
+.formulario-agregar select:focus { 
+  border-color: #00efff; 
+  box-shadow: 0 0 0 2px rgba(0, 239, 255, 0.2);
+}
+
+#inputTitulo { flex: 2 1 160px; }
+#inputAutor { flex: 1 1 120px; }
+#selectEstado { flex: 0 1 140px; cursor: pointer; }
+
+#btnAgregar {
+  padding: 10px 20px;
+  background: #00efff; /* Cian neón */
+  color: #09090b;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 0 10px rgba(0, 239, 255, 0.3);
+}
+
+#btnAgregar:hover { 
+  background: #8bffff; /* Cian más claro */
+  box-shadow: 0 0 20px rgba(0, 239, 255, 0.6);
+  transform: translateY(-1px);
+}
+
+/* ================================================
+   LOS DOS APARTADOS
+   ================================================ */
+.paneles {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+/* Apartado 1: Filtrar */
+.apartado-filtros {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  flex-shrink: 0;
+  background: #18181b;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid #27272a;
+  gap: 12px;
+}
+
+.apartado-filtros h2 {
+  font-size: 14px;
+  color: #e4e4e7;
+  border-bottom: 1px solid #27272a;
+  padding-bottom: 8px;
+  text-align: center;
+}
+
+.botones-filtro {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.btn-apartado {
+  padding: 10px;
+  background: #09090b;
+  color: #a1a1aa;
+  border: 1px solid #27272a;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.btn-apartado:hover { 
+  background: #27272a; 
+  color: #e4e4e7;
+}
+
+.btn-apartado.activo {
+  background: #8b5cf6; /* Violeta neón */
+  color: #ffffff;
+  font-weight: bold;
+  border-color: #8b5cf6;
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.4);
+}
+
+/* Apartado 2: Listado */
+.apartado-listado {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background: #18181b;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #27272a;
+  gap: 12px;
+  min-width: 0;
+}
+
+.cabecera-listado {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid #27272a;
+  padding-bottom: 12px;
+}
+
+.cabecera-listado h2 { color: #e4e4e7; font-size: 17px; }
+#contador { 
+  color: #00efff; /* Cian neón */
+  font-size: 13px; 
+  font-weight: 600;
+}
+
+/* Lista */
+#listaLibros {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+#listaLibros::-webkit-scrollbar { width: 6px; }
+#listaLibros::-webkit-scrollbar-track { background: #18181b; }
+#listaLibros::-webkit-scrollbar-thumb { background: #27272a; border-radius: 10px; }
+#listaLibros::-webkit-scrollbar-thumb:hover { background: #00efff; }
+
+#listaLibros li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px;
+  border-bottom: 1px solid #27272a;
+  transition: all 0.2s;
+  border-radius: 8px;
+  background: #09090b;
+}
+
+#listaLibros li:hover { 
+  background: #121214; 
+  border-bottom-color: #8b5cf6; /* Detalle violeta al pasar el mouse */
+}
+
+.libro-portada {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 46px;
+  background: #27272a;
+  border-radius: 6px;
+  font-size: 18px;
+  flex-shrink: 0;
+  color: white;
+}
+
+.libro-info { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+.libro-titulo { font-weight: bold; font-size: 15px; color: #e4e4e7; margin-bottom: 2px; }
+.libro-autor { font-size: 13px; color: #71717a; }
+.libro-fecha { font-size: 11px; color: #8b5cf6; margin-top: 4px; font-weight: 500; }
+
+.libro-estado {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: bold;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: transform 0.15s;
+}
+
+.libro-estado:hover { transform: scale(1.05); }
+
+/* Colores de estado oscuros pero legibles */
+.estado-pendiente { background: #422006; color: #fde047; } /* Amarillo oscuro */
+.estado-leyendo { background: #172554; color: #60a5fa; }   /* Azul oscuro */
+.estado-leido { background: #064e3b; color: #4ade80; }     /* Verde oscuro */
+
+li.completado .libro-titulo { text-decoration: line-through; color: #52525b; }
+
+.btn-eliminar {
+  background: transparent;
+  border: none;
+  color: #52525b;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 6px;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.btn-eliminar:hover { 
+  background: #ff003c; 
+  color: #ffffff; 
+  box-shadow: 0 0 10px rgba(255, 0, 60, 0.4);
+}
+
+.mensaje-vacio {
+  text-align: center;
+  padding: 40px;
+  color: #52525b;
+  font-size: 14px;
+  background: #09090b;
+  border-radius: 10px;
+  border: 2px dashed #27272a;
+}
+
+
+/* 💻 TABLET Y 📱 MÓVIL (Menos de 1024px) */
+@media (max-width: 1023px) {
+  /* Apila el menú izquierdo arriba del contenido */
+  .app {
+    flex-direction: column;
+  }
+
+  /* El menú ocupa todo el ancho */
+  .panel-menu {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #27272a;
+  }
+
+  /* Pone los filtros arriba y el listado abajo */
+  .paneles {
+    flex-direction: column;
+  }
+
+  /* El apartado de filtros ocupa todo el ancho */
+  .apartado-filtros {
+    width: 100%;
+  }
+
+  /* Los botones de filtro se ponen uno al lado del otro */
+  .botones-filtro {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+/* 📱 MÓVIL ESTRECHO (Menos de 768px) */
+@media (max-width: 767px) {
+  /* El formulario se apila hacia abajo para que sea fácil tocar con el dedo */
+  .formulario-agregar {
+    flex-direction: column;
+  }
+
+  /* Los inputs ocupan todo el ancho */
+  .formulario-agregar input,
+  .formulario-agregar select,
+  #btnAgregar {
+    width: 100%;
+  }
+}
