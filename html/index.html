@@ -12,64 +12,123 @@
 
     <!-- ========== COLUMNA IZQUIERDA: MENÚ ========== -->
     <aside class="menu">
+      <div class="logo-area">
+        <div class="logo-icon">📚</div>
+        <h3>Mi Biblioteca</h3>
+        <p class="subtitulo">Organiza tus libros</p>
+      </div>
       
-      <h3>Mi Biblioteca</h3>
+      <nav class="menu-nav">
+        <button class="activo">📑 Todos los libros</button>
+        <button>🕒 Por leer</button>
+        <button>📖 Leyendo</button>
+        <button>✅ Leídos</button>
+      </nav>
 
-      <h2>Filtros</h2>
-      <button>Todos</button>
-      <button>Por leer</button>
-      <button>Leyendo</button>
-      <button>Leídos</button>
+      <div class="acciones-laterales">
+        <button class="btn-lateral">Quitar leídos</button>
+        <button class="btn-lateral">Vaciar biblioteca</button>
+      </div>
 
-      <h2>Acciones</h2>
-      <button>Quitar leídos</button>
-      <button>Vaciar biblioteca</button>
+      <div class="frase-motivacional">
+        <p>“</p>
+        <p>Un lector vive mil vidas antes de morir.</p>
+      </div>
     </aside>
 
     <!-- ========== COLUMNA DERECHA ========== -->
     <section class="apartadoDerecho">
-      <h2>Mis libros</h2>
+      
+      <!-- Cabecera -->
+      <div class="header-derecho">
+        <div>
+          <h2>Mis Libros</h2>
+          <p class="subtitulo-header">Agrega, organiza y lee tus libros favoritos</p>
+        </div>
+        <div class="icono-usuario">👤</div>
+      </div>
+
       <!-- Formulario para agregar -->
-      <div class="formulario">
-        <label for="autor">Autor</label>
-        <input id="autor" type="text">
+      <fieldset class="seccion-formulario">
+        <h3>Agregar nuevo libro</h3>
+        <div class="formulario">
+          <div class="campo">
+            <label for="nombreLibro">Nombre del libro</label>
+            <input id="nombreLibro" type="text" placeholder="¿Qué vas a leer?">
+          </div>
+          
+          <div class="campo">
+            <label for="autor">Autor</label>
+            <input id="autor" type="text" placeholder="Nombre del autor">
+          </div>
 
-        <label for="nombreLibro">Nombre del libro</label>
-        <input id="nombreLibro" type="text">
+          <div class="campo">
+            <label for="estadoLibro">Estado</label>
+            <!-- IMPORTANTE: El ID es estadoLibro -->
+            <select id="estadoLibro">
+              <option>Por leer</option>
+              <option>Leyendo</option>
+              <option>Leído</option>
+            </select>
+          </div>
 
-        <select>
-          <option>Por leer</option>
-          <option>Leyendo</option>
-          <option>Leído</option>
-        </select>
+          <div class="campo">
+            <label for="fechaLibro">Fecha</label>
+            <input type="date" id="fechaLibro">
+          </div>
 
-        <button>Agregar</button>
-      </div>
-
-      <!-- Mensaje si no hay libros -->
-      <div class="mensaje-vacio">
-        Aún no hay libros. ¡Agrega uno arriba para ver los apartados!
-      </div>
-
-      <!-- Los dos apartados -->
-      <div class="apartados">
-
-        <!-- APARTADO 1: FILTRAR -->
-        <div class="apartado">
-          <h2>Filtrar agregados</h2>
-          <div class="botones-filtro">
-            <button>Todos</button>
-            <button>Por leer</button>
-            <button>Leyendo</button>
-            <button>Leídos</button>
+          <div class="campo boton-agregar">
+            <button id="btnAgregar">+ Agregar</button>
           </div>
         </div>
+      </fieldset>
 
-        <!-- APARTADO 2: LISTAR -->
-        <div class="apartado">
-          <h2>Listar libros</h2>
-          <div class="listaLibros"></div>
-        </div></div>
+      <!-- Contadores y Filtros -->
+      <fieldset class="seccion-filtros">
+        <h3>Filtrar libros</h3>
+        <div class="fila-filtros">
+          <div class="botones-filtro">
+            <button class="filtro-btn activo">Todos</button>
+            <button class="filtro-btn">Por leer</button>
+            <button class="filtro-btn">Leyendo</button>
+            <button class="filtro-btn">Leídos</button>
+          </div>
+          
+          <div class="contadores">
+            <div class="contador-box">
+              <span class="numero" id="contTotal">0</span>
+              <span class="label">Total</span>
+            </div>
+            <div class="contador-box">
+              <span class="numero" id="contPendientes">0</span>
+              <span class="label">Por leer</span>
+            </div>
+            <div class="contador-box">
+              <span class="numero" id="contLeidos">0</span>
+              <span class="label">Leídos</span>
+            </div>
+            <div class="contador-box">
+              <span class="numero" id="contLeyendo">0</span>
+              <span class="label">Leyendo</span>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- Lista de Libros -->
+      <fieldset class="seccion-lista">
+        <h3>Lista de libros</h3>
+        <div class="listaLibros">
+          <!-- Los libros se insertarán aquí por JS -->
+        </div>
+        <div class="mensaje-vacio" style="display: none;">
+          Aún no hay libros. ¡Agrega uno arriba para ver los apartados!
+        </div>
+      </fieldset>
+
+      <footer>
+        <p>© 2024 Mi Biblioteca | Hecho por María Ibarra</p>
+      </footer>
 
     </section>
 

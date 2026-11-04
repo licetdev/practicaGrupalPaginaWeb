@@ -1,419 +1,380 @@
-
-/* ========================================
-   PALETA EASTERN BLUE
-======================================== */
-:root {
-    --blue-50: #effcfc;
-    --blue-100: #d6f6f7;
-    --blue-200: #b2ecef;
-    --blue-300: #7cdde4;
-    --blue-400: #40c4d0;
-    --blue-500: #22a0ad;
-    --blue-600: #218899;
-    --blue-700: #216e7d;
-    --blue-800: #235a67;
-    --blue-900: #214c58;
-    --blue-950: #11313b;
-
-    --background: #f6f9fa;
-    --white: #ffffff;
-    --text: #294b55;
-    --text-light: #71858c;
-    --border: #e5edef;
-    --shadow: 0 4px 16px rgba(17, 49, 59, 0.045);
-}
-
-/* ========================================
+/* =========================
    CONFIGURACIÓN GENERAL
-======================================== */
+========================= */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-.body {
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background: var(--background);
-    color: var(--text);
-    min-height: 100vh;
+body {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #174d60;
+    background: #f3f7f8;
 }
 
-/* ========================================
-   ESTRUCTURA PRINCIPAL
-======================================== */
 .app {
     display: flex;
     min-height: 100vh;
+    max-width: 1400px;
+    margin: 0 auto;
+    background: #fff;
+    box-shadow: 0 0 20px rgba(0,0,0,0.05);
 }
 
-/* ========================================
+/* =========================
    MENÚ LATERAL
-======================================== */
+========================= */
 .menu {
     width: 260px;
     min-width: 260px;
-    background: var(--blue-900);
-    color: var(--white);
-    padding: 35px 25px;
-
+    background: #204c58;
+    color: white;
+    padding: 30px 25px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
 }
 
-.menu h3 {
-    font-size: 25px;
-    font-weight: 700;
+.logo-area {
+    text-align: center;
     margin-bottom: 30px;
-    color: var(--white);
+    border-bottom: 1px solid #2c6572;
+    padding-bottom: 20px;
 }
 
-.menu h2 {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--blue-200);
-    margin-top: 22px;
-    margin-bottom: 5px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+.logo-icon { font-size: 40px; margin-bottom: 10px; }
+
+.menu h3 { font-size: 22px; color: white; margin-bottom: 5px; }
+
+.subtitulo { font-size: 12px; color: #83e7ef; }
+
+.menu-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
 }
 
-.menu button {
-    width: 100%;
+.menu-nav button {
     padding: 12px 15px;
     border: none;
-    border-radius: 8px;
     background: transparent;
-    color: var(--blue-50);
     text-align: left;
-    font-size: 15px;
+    font-size: 14px;
+    color: white;
     cursor: pointer;
-    transition: all 0.25s ease;
+    border-radius: 8px;
+    transition: background 0.2s, padding-left 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-.menu button:hover {
-    background: var(--blue-700);
-    color: var(--white);
+.menu-nav button:hover, .menu-nav button.activo {
+    background: #2c6572;
     padding-left: 20px;
 }
 
-/* ========================================
-   CONTENIDO PRINCIPAL
-======================================== */
-.apartadoDerecho {
-    flex: 1;
-    min-width: 0;
-    padding: 40px;
-    background: var(--background);
-}
-
-.apartadoDerecho > h2 {
-    font-size: 29px;
-    font-weight: 700;
-    color: var(--blue-950);
-    margin-bottom: 28px;
-}
-
-/* ========================================
-   FORMULARIO
-======================================== */
-.formulario {
-    background: var(--white);
-    padding: 28px;
-    border-radius: 15px;
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow);
-
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 15px;
-
-    margin-bottom: 25px;
-}
-
-.formulario label {
-    width: 100%;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--blue-800);
-    margin-bottom: -9px;
-}
-
-.formulario input,
-.formulario select {
-    flex: 1;
-    min-width: 160px;
-    padding: 13px 15px;
-
-    border: 1px solid var(--border);
-    border-radius: 9px;
-
-    background: #fbfdfd;
-    color: var(--blue-950);
-
-    font-family: inherit;
-    font-size: 14px;
-    outline: none;
-
-    transition: all 0.25s ease;
-}
-
-.formulario input:hover,
-.formulario select:hover {
-    border-color: var(--blue-300);
-}
-
-.formulario input:focus,
-.formulario select:focus {
-    border-color: var(--blue-500);
-    background: var(--white);
-    box-shadow: 0 0 0 3px rgba(34, 160, 173, 0.10);
-}
-
-.formulario button {
-    padding: 13px 26px;
-    background: var(--blue-600);
-    color: var(--white);
-
-    border: none;
-    border-radius: 9px;
-
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-
-    transition: all 0.25s ease;
-}
-
-.formulario button:hover {
-    background: var(--blue-700);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(33, 110, 125, 0.18);
-}
-
-/* ========================================
-   MENSAJE DE BIBLIOTECA VACÍA
-======================================== */
-.mensaje-vacio {
-    background: #f0f8f8;
-    border: 1px dashed var(--blue-300);
-    border-radius: 12px;
-
-    padding: 27px;
-    margin-bottom: 25px;
-
-    text-align: center;
-    color: var(--blue-800);
-    font-size: 14px;
-}
-
-/* ========================================
-   APARTADOS
-======================================== */
-.apartados {
+.acciones-laterales {
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
-    gap: 22px;
+    gap: 10px;
+    border-top: 1px solid #2c6572;
+    padding-top: 20px;
 }
 
-.apartado {
-    background: var(--white);
-    padding: 26px;
-
-    border: 1px solid var(--border);
-    border-radius: 15px;
-
-    box-shadow: var(--shadow);
-}
-
-.apartado h2 {
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--blue-900);
-    margin-bottom: 20px;
-}
-
-/* ========================================
-   BOTONES DE FILTRO
-======================================== */
-.botones-filtro {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-}
-
-.botones-filtro button {
-    padding: 10px 22px;
-
-    border: 1px solid var(--blue-200);
-    border-radius: 8px;
-
-    background: #f8fbfb;
-    color: var(--blue-800);
-
-    font-size: 14px;
-    font-weight: 500;
+.btn-lateral {
+    padding: 10px;
+    background: transparent;
+    border: 1px solid #b4cbd0;
+    border-radius: 6px;
     cursor: pointer;
-
-    transition: all 0.25s ease;
-}
-
-.botones-filtro button:hover {
-    background: var(--blue-600);
-    border-color: var(--blue-600);
-    color: var(--white);
-}
-
-/* ========================================
-   LISTA DE LIBROS
-======================================== */
-.listaLibros {
-    display: grid;
-    grid-template-columns: repeat(
-        auto-fill,
-        minmax(220px, 1fr)
-    );
-    gap: 18px;
-}
-
-/* ========================================
-   TARJETAS DE LIBROS
-======================================== */
-.listaLibros > * {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px;
-
-    box-shadow: 0 3px 12px rgba(17, 49, 59, 0.04);
-
-    transition: all 0.25s ease;
-}
-
-.listaLibros > *:hover {
-    border-color: var(--blue-300);
-    transform: translateY(-3px);
-    box-shadow: 0 7px 18px rgba(17, 49, 59, 0.08);
-}
-
-.listaLibros h3 {
-    color: var(--blue-900);
-    font-size: 17px;
-    margin-bottom: 12px;
-}
-
-.listaLibros p {
-    color: var(--text-light);
-    font-size: 14px;
-    margin-bottom: 8px;
-}
-
-/* Botón eliminar */
-.listaLibros button {
-    margin-top: 12px;
-    padding: 9px 16px;
-    border: none;
-    border-radius: 7px;
-
-    background: var(--blue-100);
-    color: var(--blue-800);
-
+    color: white;
     font-size: 13px;
-    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.btn-lateral:hover { background: #2c6572; }
+
+.frase-motivacional {
+    margin-top: auto;
+    padding: 20px;
+    background: #2c6572;
+    border-radius: 8px;
+    text-align: center;
+    font-style: italic;
+    color: #83e7ef;
+    font-size: 12px;
+}
+.frase-motivacional p:first-child { font-size: 30px; line-height: 1; }
+
+/* =========================
+   CONTENIDO PRINCIPAL
+========================= */
+.apartadoDerecho {
+    flex: 1;
+    padding: 35px 40px;
+    background: #f3f7f8;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.header-derecho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.header-derecho h2 { font-size: 28px; color: #123f50; margin-bottom: 5px; }
+
+.subtitulo-header { color: #607d8b; font-size: 13px; }
+
+.icono-usuario {
+    font-size: 24px;
+    background: #e0ecef;
+    padding: 10px;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #174d60;
+}
+
+/* =========================
+   SECCIONES (Fields)
+========================= */
+fieldset {
+    border: 1px solid #dce7eb;
+    border-radius: 15px;
+    padding: 25px 28px;
+    background: white;
+    margin-bottom: 0;
+}
+
+fieldset h3 {
+    font-size: 20px;
+    color: #174d60;
+    margin-bottom: 18px;
+    font-weight: normal;
+}
+
+/* =========================
+   FORMULARIO
+========================= */
+.formulario {
+    display: grid;
+    grid-template-columns: 2fr 1.5fr 1fr 1fr auto;
+    gap: 15px;
+    align-items: end;
+}
+
+.campo { display: flex; flex-direction: column; gap: 5px; }
+
+.campo label { font-size: 12px; color: #174d60; font-weight: 600; }
+
+input, select {
+    width: 100%;
+    height: 47px;
+    padding: 0 14px;
+    border: 1px solid #dce7eb;
+    border-radius: 9px;
+    outline: none;
+    background: #fbfdfe;
+    color: #174d60;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+input:focus, select:focus {
+    border-color: #208c9c;
+    box-shadow: 0 0 0 2px #208c9c20;
+}
+
+select { cursor: pointer; }
+
+#btnAgregar {
+    padding: 13px 25px;
+    border: none;
+    border-radius: 9px;
+    background: #208c9c;
+    color: white;
+    font-weight: bold;
     cursor: pointer;
-
-    transition: 0.25s;
+    transition: background 0.2s;
+    height: 47px;
+    white-space: nowrap;
 }
 
-.listaLibros button:hover {
-    background: var(--blue-700);
-    color: var(--white);
+#btnAgregar:hover { background: #176f7d; }
+
+/* =========================
+   FILTROS Y CONTADORES
+========================= */
+.fila-filtros {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
 }
 
-/* ========================================
-   INTERACCIONES
-======================================== */
-button:focus-visible,
-input:focus-visible,
-select:focus-visible {
-    outline: 2px solid var(--blue-400);
-    outline-offset: 3px;
+.botones-filtro { display: flex; flex-wrap: wrap; gap: 12px; }
+
+.filtro-btn {
+    min-width: 82px;
+    padding: 10px 22px;
+    border: 1px solid #8de8f2;
+    border-radius: 8px;
+    background: #fafdfe;
+    color: #176b83;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
 }
 
-button:active {
-    transform: scale(0.98);
+.filtro-btn.activo, .filtro-btn:hover {
+    border-color: #208c9c;
+    background: #e5f8fa;
 }
 
-/* ========================================
+.contadores { display: flex; gap: 15px; }
+
+.contador-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #dce7eb;
+    border-radius: 10px;
+    padding: 8px 20px;
+    min-width: 75px;
+    background: #fbfdfe;
+}
+
+.contador-box .numero { font-size: 20px; font-weight: bold; color: #174d60; }
+.contador-box .label { font-size: 10px; color: #607d8b; text-transform: uppercase; margin-top: 2px; }
+
+/* =========================
+   LISTA DE LIBROS
+========================= */
+.listaLibros { display: flex; flex-direction: column; gap: 12px; }
+
+.listaLibros > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    border: 1px solid #dce7eb;
+    border-radius: 12px;
+    background: white;
+    transition: box-shadow 0.2s;
+}
+
+.listaLibros > div:hover { box-shadow: 0 2px 8px rgba(32, 140, 156, 0.1); }
+
+.libro-info { display: flex; align-items: center; gap: 15px; flex: 1; }
+
+.libro-icono {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #8de8f2;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.libro-texto h4 { font-size: 15px; margin-bottom: 4px; color: #174d60; }
+.libro-texto p { font-size: 13px; color: #607d8b; margin: 0; }
+
+.etiqueta-estado {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 6px;
+    display: inline-block;
+    margin-top: 5px;
+    font-weight: 600;
+}
+
+.estado-Por.leer { background: #fff3e0; color: #ef6c00; }
+.estado-Leyendo { background: #e0f2f1; color: #208c9c; }
+.estado-Leído { background: #e8f5e9; color: #2e7d32; }
+
+.libro-fecha { font-size: 13px; color: #607d8b; margin-left: auto; margin-right: 20px; }
+
+.libro-acciones { display: flex; gap: 8px; }
+
+.libro-acciones button {
+    background: #fff5f5;
+    border: 1px solid #f2b9b9;
+    border-radius: 7px;
+    padding: 9px 12px;
+    cursor: pointer;
+    color: #c03939;
+    transition: background 0.2s, color 0.2s;
+}
+
+.libro-acciones button:hover {
+    border-color: #c03939;
+    background: #c03939;
+    color: white;
+}
+
+.mensaje-vacio {
+    padding: 25px 15px;
+    border: 1px dashed #65d7e6;
+    border-radius: 10px;
+    background: #f3fbfc;
+    color: #176b83;
+    text-align: center;
+    margin-top: 10px;
+}
+
+footer {
+    text-align: center;
+    font-size: 12px;
+    color: #8ca8b0;
+    margin-top: 10px;
+    padding-top: 20px;
+    border-top: 1px solid #dce7eb;
+}
+
+/* =========================
    RESPONSIVE
-======================================== */
-@media (max-width: 900px) {
-
+========================= */
+@media (max-width: 1024px) {
+    .app { flex-direction: column; }
     .menu {
-        width: 220px;
-        min-width: 220px;
-        padding: 25px 18px;
+        width: 100%; min-width: 0; border-right: none; border-bottom: 1px solid #2c6572;
+        flex-direction: row; padding: 15px 20px; align-items: center; justify-content: space-between;
     }
-
-    .apartadoDerecho {
-        padding: 30px 25px;
-    }
-
+    .logo-area { margin-bottom: 0; border: none; padding: 0; text-align: left; }
+    .logo-icon { display: none; }
+    .menu-nav { flex-direction: row; overflow-x: auto; gap: 5px; }
+    .menu-nav button { padding: 8px 12px; font-size: 13px; white-space: nowrap; }
+    .acciones-laterales, .frase-motivacional { display: none; }
+    .apartadoDerecho { padding: 25px; }
+    .formulario { grid-template-columns: 1fr 1fr; }
+    .campo.boton-agregar { grid-column: 1 / -1; }
+    #btnAgregar { width: 100%; }
 }
 
-@media (max-width: 650px) {
-
-    .app {
-        flex-direction: column;
-    }
-
-    .menu {
-        width: 100%;
-        min-width: 100%;
-        padding: 22px;
-    }
-
-    .menu h3 {
-        margin-bottom: 10px;
-    }
-
-    .menu h2 {
-        margin-top: 12px;
-    }
-
-    .apartadoDerecho {
-        padding: 22px 16px;
-    }
-
-    .apartadoDerecho > h2 {
-        font-size: 25px;
-    }
-
-    .formulario {
-        flex-direction: column;
-        align-items: stretch;
-        padding: 22px;
-    }
-
-    .formulario input,
-    .formulario select {
-        width: 100%;
-        min-width: 100%;
-    }
-
-    .formulario button {
-        width: 100%;
-    }
-
-    .botones-filtro button {
-        flex: 1;
-        min-width: 100px;
-    }
-
-    .listaLibros {
-        grid-template-columns: 1fr;
-    }
-
+@media (max-width: 767px) {
+    .menu-nav { display: none; }
+    .header-derecho h2 { font-size: 22px; }
+    .formulario { grid-template-columns: 1fr; }
+    .fila-filtros { flex-direction: column; align-items: stretch; }
+    .botones-filtro { justify-content: space-between; }
+    .filtro-btn { flex: 1; text-align: center; padding: 10px 5px; font-size: 12px; min-width: 0; }
+    .contadores { justify-content: space-between; }
+    .contador-box { flex: 1; padding: 8px 10px; min-width: 0; }
+    .listaLibros > div { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .libro-fecha { margin-left: 35px; margin-right: 0; }
+    .libro-acciones { align-self: flex-end; }
 }
