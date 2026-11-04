@@ -1,380 +1,655 @@
-/* =========================
-   CONFIGURACIÓN GENERAL
-========================= */
+/* =========================================
+   1. RESET UNIVERSAL
+   Elimina márgenes/paddings por defecto y
+   unifica el modelo de caja.
+========================================= */
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    margin: 0;                  /* Quita el margen exterior por defecto de todos los elementos */
+    padding: 0;                 /* Quita el relleno interior por defecto de todos los elementos */
+    box-sizing: border-box;     /* width/height incluyen padding y borde (evita descuadres) */
 }
+
+/* =========================================
+   ESTILOS GLOBALES (body)
+   Tipografía, tamaño, color de texto y fondo.
+========================================= */
 
 body {
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-    color: #174d60;
-    background: #f3f7f8;
+    font-family: Arial, sans-serif; /* Tipo de letra de la página (Arial o cualquier sans-serif) */
+    font-size: 14px;                /* Tamaño base de la letra: 14 píxeles */
+    color: #174d60;                 /* Color del texto: azul petróleo oscuro */
+    background: #f3f7f8;            /* Color de fondo de la página: gris azulado muy claro */
 }
+
+/* =========================================
+   2. CONTENEDOR PRINCIPAL (.app)
+   Organiza el menú izquierdo y el contenido
+   derecho de la biblioteca.
+========================================= */
 
 .app {
-    display: flex;
-    min-height: 100vh;
-    max-width: 1400px;
-    margin: 0 auto;
-    background: #fff;
-    box-shadow: 0 0 20px rgba(0,0,0,0.05);
+    display: flex;                  /* Flexbox: coloca menú y contenido en fila horizontal */
+    min-height: 100vh;              /* Altura mínima = 100% del viewport (ocupa toda la pantalla) */
+    max-width: 1400px;              /* Ancho máximo = 1400px (no se estira más en pantallas grandes) */
+    margin: 0 auto;                 /* Margen lateral automático: centra el contenedor horizontalmente */
+    background: #fff;               /* Fondo blanco del contenedor (destaca sobre el body) */
+    box-shadow: 0 0 20px rgba(0,0,0,0.05); /* Sombra suave: difuminado 20px, negro al 5% de opacidad */
 }
 
-/* =========================
-   MENÚ LATERAL
-========================= */
+/* =========================================
+   3. MENÚ LATERAL IZQUIERDO (.menu)
+   Configura el ancho, fondo y posición de
+   los elementos del menú.
+========================================= */
+
 .menu {
-    width: 260px;
-    min-width: 260px;
-    background: #204c58;
-    color: white;
-    padding: 30px 25px;
-    display: flex;
-    flex-direction: column;
+    width: 260px;                   /* Ancho fijo del menú: 260 píxeles */
+    min-width: 260px;               /* Ancho mínimo: impide que flex lo encoja por debajo de 260px */
+    background: #204c58;            /* Fondo del menú: azul petróleo oscuro */
+    color: #fff;                   /* Color del texto: blanco (contrasta con el fondo oscuro) */
+    padding: 30px 25px;             /* Relleno interior: 30px arriba/abajo y 25px a los lados */
+    display: flex;                  /* Flexbox dentro del menú para organizar sus hijos */
+    flex-direction: column;         /* Coloca los hijos en columna vertical (uno debajo de otro) */
 }
+
+/* =========================================
+   4. LOGO Y TÍTULO DEL MENÚ
+   Configura el icono, título y subtítulo
+   que aparecen arriba del menú.
+========================================= */
 
 .logo-area {
-    text-align: center;
-    margin-bottom: 30px;
-    border-bottom: 1px solid #2c6572;
-    padding-bottom: 20px;
+    text-align: center;             /* Centra horizontalmente el contenido (icono y textos) */
+    margin-bottom: 30px;            /* Separación inferior respecto al siguiente bloque */
+    border-bottom: 1px solid #2c6572; /* Línea divisoria inferior de color azul medio */
+    padding-bottom: 20px;           /* Espacio entre el contenido y la línea divisoria */
 }
 
-.logo-icon { font-size: 40px; margin-bottom: 10px; }
+.logo-icon { font-size: 40px; margin-bottom: 10px; } /* Icono grande (40px) con separación inferior */
 
-.menu h3 { font-size: 22px; color: white; margin-bottom: 5px; }
+.menu h3 { font-size: 22px; color: #fff; margin-bottom: 5px; } /* Título del menú: 22px, blanco, margen inferior */
 
-.subtitulo { font-size: 12px; color: #83e7ef; }
+.subtitulo { font-size: 12px; color: #83e7ef; } /* Subtítulo pequeño: 12px, celeste claro */
+
+/* =========================================
+   5. BOTONES DEL MENÚ LATERAL
+   Organiza los botones y configura sus
+   colores, tamaños y separación.
+========================================= */
 
 .menu-nav {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    flex: 1;
+    display: flex;                  /* Flexbox para los botones de navegación */
+    flex-direction: column;         /* Apila los botones verticalmente */
+    gap: 5px;                       /* Separación de 5px entre cada botón */
 }
 
 .menu-nav button {
-    padding: 12px 15px;
-    border: none;
-    background: transparent;
-    text-align: left;
-    font-size: 14px;
-    color: white;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: background 0.2s, padding-left 0.2s;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    padding: 12px 15px;             /* Relleno interior: 12px vertical, 15px horizontal */
+    border: none;                   /* Sin borde */
+    background: transparent;        /* Fondo transparente (hereda el del menú) */
+    text-align: left;               /* Texto alineado a la izquierda */
+    font-size: 14px;                /* Tamaño de letra: 14px */
+    color: #fff;                   /* Texto blanco */
+    cursor: pointer;                /* Cursor tipo mano al pasar por encima */
+    border-radius: 8px;             /* Esquinas redondeadas de 8px */
+    transition: background 0.2s, padding-left 0.2s; /* Animación suave en fondo y padding izquierdo */
+    display: flex;                  /* Flexbox dentro del botón (para icono + texto) */
+    align-items: start;            /* Centra verticalmente icono y texto */
+    gap: 10px;                      /* Separación de 10px entre icono y texto */
 }
+
+/* =========================================
+   6. EFECTO DE LOS BOTONES DEL MENÚ
+   Cambia el fondo al pasar el mouse o
+   cuando un botón está seleccionado.
+========================================= */
 
 .menu-nav button:hover, .menu-nav button.activo {
-    background: #2c6572;
-    padding-left: 20px;
+    background: #2c6572;            /* Fondo azul medio al pasar el mouse o si está activo */
+    padding-left: 20px;             /* Aumenta el padding izquierdo (efecto de desplazamiento) */
 }
 
+/* =========================================
+   7. ACCIONES DEL MENÚ LATERAL
+   Organiza los botones "Quitar leídos"
+   y "Vaciar biblioteca".
+========================================= */
+
 .acciones-laterales {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    border-top: 1px solid #2c6572;
-    padding-top: 20px;
+    margin-top: 20px;               /* Separación superior respecto al bloque anterior */
+    display: flex;                  /* Flexbox para los botones de acciones */
+    flex-direction: column;         /* Apila los botones verticalmente */
+    gap: 10px;                      /* Separación de 10px entre botones */
+    border-top: 1px solid #2c6572;  /* Línea divisoria superior */
+    padding-top: 20px;              /* Espacio entre la línea y los botones */
 }
 
 .btn-lateral {
-    padding: 10px;
-    background: transparent;
-    border: 1px solid #b4cbd0;
-    border-radius: 6px;
-    cursor: pointer;
-    color: white;
-    font-size: 13px;
-    transition: background 0.2s;
+    padding: 10px;                  /* Relleno interior de 10px */
+    background: transparent;        /* Fondo transparente */
+    border: 1px solid #b4cbd0;      /* Borde gris azulado de 1px */
+    border-radius: 6px;             /* Esquinas redondeadas de 6px */
+    cursor: pointer;                /* Cursor tipo mano */
+    color: white;                   /* Texto blanco */
+    font-size: 13px;                /* Tamaño de letra: 13px */
+    transition: background 0.2s;    /* Animación suave del fondo */
 }
 
-.btn-lateral:hover { background: #2c6572; }
+.btn-lateral:hover { background: #2c6572; } /* Fondo azul medio al pasar el mouse */
+
+/* =========================================
+   8. FRASE MOTIVACIONAL
+   Configura el cuadro y el texto que
+   aparecen debajo del menú.
+========================================= */
 
 .frase-motivacional {
-    margin-top: auto;
-    padding: 20px;
-    background: #2c6572;
-    border-radius: 8px;
-    text-align: center;
-    font-style: italic;
-    color: #83e7ef;
-    font-size: 12px;
+    margin-top: auto;               /* Empuja el bloque al fondo del menú (flex lo permite) */
+    padding: 20px;                  /* Relleno interior de 20px */
+    background: #2c6572;            /* Fondo azul medio */
+    border-radius: 8px;             /* Esquinas redondeadas de 8px */
+    text-align: center;             /* Texto centrado */
+    font-style: italic;             /* Texto en cursiva */
+    color: #83e7ef;                 /* Texto celeste claro */
+    font-size: 12px;                /* Tamaño de letra: 12px */
 }
-.frase-motivacional p:first-child { font-size: 30px; line-height: 1; }
 
-/* =========================
-   CONTENIDO PRINCIPAL
-========================= */
+.frase-motivacional p:first-child { font-size: 30px; line-height: 1; } /* Primer párrafo (comillas): grande y sin interlineado */
+
+/* =========================================
+   9. CONTENIDO PRINCIPAL DERECHO (.apartadoDerecho)
+   Configura el espacio donde aparecen el
+   formulario, filtros y libros.
+========================================= */
+
 .apartadoDerecho {
-    flex: 1;
-    padding: 35px 40px;
-    background: #f3f7f8;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+    flex: 1;                        /* Ocupa todo el espacio restante que deja el menú */
+    padding: 35px 40px;             /* Relleno interior: 35px vertical, 40px horizontal */
+    background: #f3f7f8;            /* Fondo gris azulado claro */
+    display: flex;                  /* Flexbox para organizar secciones */
+    flex-direction: column;         /* Apila las secciones verticalmente */
+    gap: 15px;                      /* Separación de 15px entre secciones */
 }
+
+/* =========================================
+   10. ENCABEZADO DERECHO
+   Organiza el título principal, subtítulo
+   y el icono del usuario.
+========================================= */
 
 .header-derecho {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
+    display: flex;                  /* Flexbox: título a la izquierda, icono a la derecha */
+    justify-content: space-between; /* Reparte el espacio entre ambos extremos */
+    align-items: center;            /* Centra verticalmente los elementos */
+    margin-bottom: 10px;            /* Separación inferior de 10px */
 }
 
-.header-derecho h2 { font-size: 28px; color: #123f50; margin-bottom: 5px; }
+.header-derecho h2 { font-size: 28px; color: #123f50; margin-bottom: 5px; } /* Título: 28px, azul oscuro, margen inferior */
 
-.subtitulo-header { color: #607d8b; font-size: 13px; }
+.subtitulo-header { color: #607d8b; font-size: 13px; } /* Subtítulo: gris azulado, 13px */
 
 .icono-usuario {
-    font-size: 24px;
-    background: #e0ecef;
-    padding: 10px;
-    border-radius: 50%;
-    width: 45px;
-    height: 45px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #174d60;
+    font-size: 24px;                /* Tamaño del icono: 24px */
+    background: #e0ecef;            /* Fondo gris azulado muy claro */
+    padding: 10px;                  /* Relleno interior de 10px */
+    border-radius: 50%;             /* Forma circular */
+    width: 45px;                    /* Ancho fijo de 45px */
+    height: 45px;                   /* Alto fijo de 45px */
+    display: flex;                  /* Flexbox para centrar el icono */
+    align-items: center;            /* Centrado vertical */
+    justify-content: center;        /* Centrado horizontal */
+    color: #174d60;                 /* Color del icono: azul petróleo */
 }
 
-/* =========================
-   SECCIONES (Fields)
-========================= */
+/* =========================================
+   11. CUADROS DE LAS SECCIONES (fieldset)
+   Configura bordes, fondo y títulos de
+   los apartados del formulario.
+========================================= */
+
 fieldset {
-    border: 1px solid #dce7eb;
-    border-radius: 15px;
-    padding: 25px 28px;
-    background: white;
-    margin-bottom: 0;
+    border: 1px solid #dce7eb;      /* Borde gris azulado claro de 1px */
+    border-radius: 15px;            /* Esquinas redondeadas de 15px */
+    padding: 25px 28px;             /* Relleno interior: 25px vertical, 28px horizontal */
+    background: white;              /* Fondo blanco */
+    margin-bottom: 0;               /* Sin margen inferior (el gap del padre se encarga) */
 }
 
 fieldset h3 {
-    font-size: 20px;
-    color: #174d60;
-    margin-bottom: 18px;
-    font-weight: normal;
+    font-size: 20px;                /* Título de sección: 20px */
+    color: #174d60;                 /* Color azul petróleo */
+    margin-bottom: 18px;            /* Separación inferior de 18px */
+    font-weight: normal;            /* Peso de fuente normal (no negrita) */
 }
 
-/* =========================
-   FORMULARIO
-========================= */
+/* =========================================
+   12. FORMULARIO PARA AGREGAR LIBROS
+   Organiza los campos en columnas y
+   controla su separación.
+========================================= */
+
 .formulario {
-    display: grid;
-    grid-template-columns: 2fr 1.5fr 1fr 1fr auto;
-    gap: 15px;
-    align-items: end;
+    display: grid;                  /* Activa CSS Grid para el formulario */
+    grid-template-columns: 2fr 1.5fr 1fr 1fr auto; /* 5 columnas con anchos proporcionales; la última se ajusta al contenido */
+    gap: 15px;                      /* Separación de 15px entre columnas y filas */
+    align-items: end;               /* Alinea los elementos al fondo (útil para el botón) */
 }
 
-.campo { display: flex; flex-direction: column; gap: 5px; }
+.campo { display: flex; flex-direction: column; gap: 5px; } /* Cada campo: label arriba, input abajo, 5px de separación */
 
-.campo label { font-size: 12px; color: #174d60; font-weight: 600; }
+.campo label { font-size: 12px; color: #174d60; font-weight: 600; } /* Etiquetas: 12px, azul petróleo, seminegrita */
+
+/* =========================================
+   13. CAMPOS DE ENTRADA (input, select)
+   Configura el diseño de los campos donde
+   escribimos y seleccionamos datos.
+========================================= */
 
 input, select {
-    width: 100%;
-    height: 47px;
-    padding: 0 14px;
-    border: 1px solid #dce7eb;
-    border-radius: 9px;
-    outline: none;
-    background: #fbfdfe;
-    color: #174d60;
-    font-family: inherit;
-    font-size: 14px;
+    width: 100%;                    /* Ocupa todo el ancho disponible de su columna */
+    height: 47px;                   /* Altura fija de 47px */
+    padding: 0 14px;                /* Relleno horizontal de 14px */
+    border: 1px solid #dce7eb;      /* Borde gris azulado claro */
+    border-radius: 9px;             /* Esquinas redondeadas de 9px */
+    outline: none;                  /* Quita el contorno por defecto al enfocar */
+    background: #fbfdfe;            /* Fondo blanco azulado muy claro */
+    color: #174d60;                 /* Color del texto introducido */
+    font-family: inherit;           /* Hereda la fuente del body (Arial) */
+    font-size: 14px;                /* Tamaño de letra: 14px */
 }
 
 input:focus, select:focus {
-    border-color: #208c9c;
-    box-shadow: 0 0 0 2px #208c9c20;
+    border-color: #208c9c;          /* Al enfocar: borde azul turquesa */
+    box-shadow: 0 0 0 2px #208c9c20; /* Halo exterior semitransparente (últimos dígitos = opacidad) */
 }
 
-select { cursor: pointer; }
+select { cursor: pointer; }         /* Cursor tipo mano en los selectores */
+
+/* =========================================
+   14. BOTÓN AGREGAR LIBRO (#btnAgregar)
+   Configura tamaño, color y efecto del
+   botón para registrar libros.
+========================================= */
 
 #btnAgregar {
-    padding: 13px 25px;
-    border: none;
-    border-radius: 9px;
-    background: #208c9c;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.2s;
-    height: 47px;
-    white-space: nowrap;
+    padding: 13px 25px;             /* Relleno interior: 13px vertical, 25px horizontal */
+    border: none;                   /* Sin borde */
+    border-radius: 9px;             /* Esquinas redondeadas de 9px */
+    background: #208c9c;            /* Fondo azul turquesa */
+    color: white;                   /* Texto blanco */
+    font-weight: bold;              /* Texto en negrita */
+    cursor: pointer;                /* Cursor tipo mano */
+    transition: background 0.2s;    /* Animación suave del fondo */
+    height: 47px;                   /* Altura igual a la de los inputs (alineación) */
+    white-space: nowrap;            /* Evita que el texto se parta en varias líneas */
 }
 
-#btnAgregar:hover { background: #176f7d; }
+#btnAgregar:hover { background: #176f7d; } /* Fondo más oscuro al pasar el mouse */
 
-/* =========================
-   FILTROS Y CONTADORES
-========================= */
+/* =========================================
+   15. FILTROS DE LOS LIBROS
+   Organiza los botones que permiten
+   visualizar libros según su estado.
+========================================= */
+
 .fila-filtros {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 15px;
+    display: flex;                  /* Flexbox para filtros y contadores en fila */
+    justify-content: space-between; /* Filtros a la izquierda, contadores a la derecha */
+    align-items: center;            /* Centrado vertical */
+    flex-wrap: wrap;                /* Permite saltar de línea si no caben */
+    gap: 15px;                      /* Separación de 15px entre grupos */
 }
 
-.botones-filtro { display: flex; flex-wrap: wrap; gap: 12px; }
+.botones-filtro { display: flex; flex-wrap: wrap; gap: 12px; } /* Botones de filtro en fila, con salto de línea y 12px de separación */
 
 .filtro-btn {
-    min-width: 82px;
-    padding: 10px 22px;
-    border: 1px solid #8de8f2;
-    border-radius: 8px;
-    background: #fafdfe;
-    color: #176b83;
-    font-family: inherit;
-    cursor: pointer;
-    transition: background 0.2s, border-color 0.2s;
+    min-width: 82px;                /* Ancho mínimo: 82px */
+    padding: 10px 22px;             /* Relleno interior: 10px vertical, 22px horizontal */
+    border: 1px solid #8de8f2;      /* Borde celeste claro */
+    border-radius: 8px;             /* Esquinas redondeadas de 8px */
+    background: #fafdfe;            /* Fondo blanco azulado */
+    color: #176b83;                 /* Texto azul petróleo */
+    font-family: inherit;           /* Hereda la fuente del body */
+    cursor: pointer;                /* Cursor tipo mano */
+    transition: background 0.2s, border-color 0.2s; /* Animación suave en fondo y borde */
 }
 
 .filtro-btn.activo, .filtro-btn:hover {
-    border-color: #208c9c;
-    background: #e5f8fa;
+    border-color: #208c9c;          /* Borde turquesa al activo o hover */
+    background: #e5f8fa;            /* Fondo celeste muy claro */
 }
 
-.contadores { display: flex; gap: 15px; }
+/* =========================================
+   16. CONTADORES DE LIBROS
+   Configura los cuadros que muestran la
+   cantidad de libros registrados.
+========================================= */
+
+.contadores { display: flex; gap: 15px; } /* Contadores en fila con 15px de separación */
 
 .contador-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #dce7eb;
-    border-radius: 10px;
-    padding: 8px 20px;
-    min-width: 75px;
-    background: #fbfdfe;
+    display: flex;                  /* Flexbox para apilar número y etiqueta */
+    flex-direction: column;         /* Número arriba, etiqueta abajo */
+    align-items: center;            /* Centrado horizontal */
+    justify-content: center;        /* Centrado vertical */
+    border: 1px solid #dce7eb;      /* Borde gris azulado claro */
+    border-radius: 10px;            /* Esquinas redondeadas de 10px */
+    padding: 8px 20px;              /* Relleno interior: 8px vertical, 20px horizontal */
+    min-width: 75px;                /* Ancho mínimo: 75px */
+    background: #fbfdfe;            /* Fondo blanco azulado */
 }
 
-.contador-box .numero { font-size: 20px; font-weight: bold; color: #174d60; }
-.contador-box .label { font-size: 10px; color: #607d8b; text-transform: uppercase; margin-top: 2px; }
+.contador-box .numero { font-size: 20px; font-weight: bold; color: #174d60; } /* Número: 20px, negrita, azul petróleo */
 
-/* =========================
-   LISTA DE LIBROS
-========================= */
-.listaLibros { display: flex; flex-direction: column; gap: 12px; }
+.contador-box .label { font-size: 10px; color: #607d8b; text-transform: uppercase; margin-top: 2px; } /* Etiqueta: 10px, gris azulado, mayúsculas, margen superior */
+
+/* =========================================
+   17. LISTA DE LIBROS (.listaLibros)
+   Organiza las tarjetas donde aparecen
+   los libros registrados.
+========================================= */
+
+.listaLibros { display: flex; flex-direction: column; gap: 12px; } /* Lista en columna con 12px de separación */
 
 .listaLibros > div {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 15px 20px;
-    border: 1px solid #dce7eb;
-    border-radius: 12px;
-    background: white;
-    transition: box-shadow 0.2s;
+    display: flex;                  /* Cada tarjeta en fila */
+    align-items: center;            /* Centrado vertical */
+    justify-content: space-between; /* Info a la izquierda, acciones a la derecha */
+    padding: 15px 20px;             /* Relleno interior: 15px vertical, 20px horizontal */
+    border: 1px solid #dce7eb;      /* Borde gris azulado claro */
+    border-radius: 12px;            /* Esquinas redondeadas de 12px */
+    background: white;              /* Fondo blanco */
+    transition: box-shadow 0.2s;    /* Animación suave de la sombra */
 }
 
-.listaLibros > div:hover { box-shadow: 0 2px 8px rgba(32, 140, 156, 0.1); }
+.listaLibros > div:hover { box-shadow: 0 2px 8px rgba(32, 140, 156, 0.1); } /* Sombra turquesa suave al pasar el mouse */
 
-.libro-info { display: flex; align-items: center; gap: 15px; flex: 1; }
+/* =========================================
+   18. INFORMACIÓN DE LOS LIBROS
+   Configura el icono, nombre y autor
+   dentro de cada tarjeta.
+========================================= */
+
+.libro-info { display: flex; align-items: center; gap: 15px; flex: 1; } /* Icono + texto en fila; flex:1 para ocupar el espacio disponible */
 
 .libro-icono {
-    width: 20px;
-    height: 20px;
-    border: 2px solid #8de8f2;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 20px;                    /* Ancho del círculo: 20px */
+    height: 20px;                   /* Alto del círculo: 20px */
+    border: 2px solid #8de8f2;      /* Borde celeste de 2px */
+    border-radius: 50%;             /* Forma circular */
+    display: flex;                  /* Flexbox para centrar contenido interno */
+    align-items: center;            /* Centrado vertical */
+    justify-content: center;        /* Centrado horizontal */
 }
 
-.libro-texto h4 { font-size: 15px; margin-bottom: 4px; color: #174d60; }
-.libro-texto p { font-size: 13px; color: #607d8b; margin: 0; }
+.libro-texto h4 { font-size: 15px; margin-bottom: 4px; color: #174d60; } /* Título del libro: 15px, azul petróleo, margen inferior */
+
+.libro-texto p { font-size: 13px; color: #607d8b; margin: 0; } /* Autor: 13px, gris azulado, sin margen */
+
+/* =========================================
+   19. ESTADOS DE LOS LIBROS
+   Configura los colores de las etiquetas:
+   Por leer, Leyendo y Leído.
+========================================= */
 
 .etiqueta-estado {
-    font-size: 11px;
-    padding: 3px 10px;
-    border-radius: 6px;
-    display: inline-block;
-    margin-top: 5px;
-    font-weight: 600;
+    font-size: 11px;                /* Tamaño de la etiqueta: 11px */
+    padding: 3px 10px;              /* Relleno interior: 3px vertical, 10px horizontal */
+    border-radius: 6px;             /* Esquinas redondeadas de 6px */
+    display: inline-block;          /* Se ajusta al contenido (no ocupa toda la línea) */
+    margin-top: 5px;                /* Separación superior de 5px */
+    font-weight: 600;               /* Seminegrita */
 }
 
-.estado-Por.leer { background: #fff3e0; color: #ef6c00; }
-.estado-Leyendo { background: #e0f2f1; color: #208c9c; }
-.estado-Leído { background: #e8f5e9; color: #2e7d32; }
+.estado-Por.leer { background: #fff3e0; color: #ef6c00; } /* "Por leer": fondo naranja claro, texto naranja */
+.estado-Leyendo { background: #e0f2f1; color: #208c9c; } /* "Leyendo": fondo celeste claro, texto turquesa */
+.estado-Leído { background: #e8f5e9; color: #2e7d32; }   /* "Leído": fondo verde claro, texto verde */
 
-.libro-fecha { font-size: 13px; color: #607d8b; margin-left: auto; margin-right: 20px; }
+/* =========================================
+   20. FECHA DE LOS LIBROS
+   Configura tamaño, color y posición de
+   la fecha de cada libro.
+========================================= */
 
-.libro-acciones { display: flex; gap: 8px; }
+.libro-fecha { font-size: 13px; color: #607d8b; margin-left: auto; margin-right: 20px; } /* Fecha: 13px, gris azulado; margin-left:auto la empuja a la derecha */
+
+/* =========================================
+   21. BOTÓN ELIMINAR LIBRO
+   Configura el diseño del botón para
+   eliminar un libro individualmente.
+========================================= */
+
+.libro-acciones { display: flex; gap: 8px; } /* Contenedor de acciones en fila con 8px de separación */
 
 .libro-acciones button {
-    background: #fff5f5;
-    border: 1px solid #f2b9b9;
-    border-radius: 7px;
-    padding: 9px 12px;
-    cursor: pointer;
-    color: #c03939;
-    transition: background 0.2s, color 0.2s;
+    background: #fff5f5;            /* Fondo rojo muy claro */
+    border: 1px solid #f2b9b9;      /* Borde rojo claro */
+    border-radius: 7px;             /* Esquinas redondeadas de 7px */
+    padding: 9px 12px;              /* Relleno interior: 9px vertical, 12px horizontal */
+    cursor: pointer;                /* Cursor tipo mano */
+    color: #c03939;                 /* Texto rojo oscuro */
+    transition: background 0.2s, color 0.2s; /* Animación suave en fondo y color */
 }
 
 .libro-acciones button:hover {
-    border-color: #c03939;
-    background: #c03939;
-    color: white;
+    border-color: #c03939;          /* Borde rojo al pasar el mouse */
+    background: #c03939;            /* Fondo rojo */
+    color: white;                   /* Texto blanco */
 }
+
+/* =========================================
+   22. MENSAJE DE LISTA VACÍA
+   Configura el aviso que aparece cuando
+   todavía no hay libros registrados.
+========================================= */
 
 .mensaje-vacio {
-    padding: 25px 15px;
-    border: 1px dashed #65d7e6;
-    border-radius: 10px;
-    background: #f3fbfc;
-    color: #176b83;
-    text-align: center;
-    margin-top: 10px;
+    padding: 25px 15px;             /* Relleno interior: 25px vertical, 15px horizontal */
+    border: 1px dashed #65d7e6;     /* Borde discontinuo celeste */
+    border-radius: 10px;            /* Esquinas redondeadas de 10px */
+    background: #f3fbfc;            /* Fondo celeste muy claro */
+    color: #176b83;                 /* Texto azul petróleo */
+    text-align: center;             /* Texto centrado */
+    margin-top: 10px;               /* Separación superior de 10px */
 }
+
+/* =========================================
+   23. PIE DE PÁGINA (footer)
+   Configura el texto que aparece al final
+   de la biblioteca.
+========================================= */
 
 footer {
-    text-align: center;
-    font-size: 12px;
-    color: #8ca8b0;
-    margin-top: 10px;
-    padding-top: 20px;
-    border-top: 1px solid #dce7eb;
+    text-align: center;             /* Texto centrado */
+    font-size: 12px;                /* Tamaño de letra: 12px */
+    color: #8ca8b0;                 /* Texto gris azulado claro */
+    margin-top: 10px;               /* Separación superior de 10px */
+    padding-top: 20px;              /* Espacio interior superior de 20px */
+    border-top: 1px solid #dce7eb;  /* Línea divisoria superior */
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
-@media (max-width: 1024px) {
-    .app { flex-direction: column; }
-    .menu {
-        width: 100%; min-width: 0; border-right: none; border-bottom: 1px solid #2c6572;
-        flex-direction: row; padding: 15px 20px; align-items: center; justify-content: space-between;
-    }
-    .logo-area { margin-bottom: 0; border: none; padding: 0; text-align: left; }
-    .logo-icon { display: none; }
-    .menu-nav { flex-direction: row; overflow-x: auto; gap: 5px; }
-    .menu-nav button { padding: 8px 12px; font-size: 13px; white-space: nowrap; }
-    .acciones-laterales, .frase-motivacional { display: none; }
-    .apartadoDerecho { padding: 25px; }
-    .formulario { grid-template-columns: 1fr 1fr; }
-    .campo.boton-agregar { grid-column: 1 / -1; }
-    #btnAgregar { width: 100%; }
+/* =========================================
+   24. BOTÓN DEL MENÚ RESPONSIVE (#menuBtn)
+========================================= */
+
+#menuBtn {
+    display: none;                  /* Oculto por defecto (solo aparece en tablet/móvil) */
+    background: transparent;        /* Fondo transparente */
+    border: none;                   /* Sin borde */
+    color: white;                   /* Icono blanco */
+    font-size: 25px;                /* Tamaño del icono: 25px */
+    cursor: pointer;                /* Cursor tipo mano */
 }
+
+/* =========================================
+   25. RESPONSIVE PARA TABLETS (≤1024px)
+========================================= */
+
+@media (max-width: 1024px) {
+
+    .app {
+        flex-direction: column;     /* Cambia de fila a columna: menú arriba, contenido abajo */
+    }
+
+    .menu {
+        width: 100%;                /* El menú ocupa todo el ancho */
+        min-width: 0;               /* Quita el ancho mínimo para que no desborde */
+        padding: 15px 20px;         /* Relleno interior: 15px vertical, 20px horizontal */
+        flex-direction: row;        /* Coloca los hijos del menú en fila horizontal */
+        align-items: center;        /* Centrado vertical */
+        flex-wrap: wrap;            /* Permite saltar de línea */
+        gap: 15px;                  /* Separación de 15px entre elementos */
+    }
+
+    #menuBtn {
+        display: block;             /* Muestra el botón hamburguesa */
+    }
+
+    .logo-area {
+        margin-bottom: 0;           /* Quita margen inferior */
+        padding: 0;                 /* Quita relleno */
+        border: none;               /* Quita la línea divisoria */
+        text-align: left;           /* Alinea el logo a la izquierda */
+    }
+
+    .logo-icon {
+        display: none;              /* Oculta el icono grande del logo */
+    }
+
+    .menu-nav {
+        display: none;              /* Oculta la navegación por defecto (se abre con el botón) */
+        width: 100%;                /* Ocupa todo el ancho cuando se muestra */
+        flex-direction: column;     /* Elementos en columna */
+        order: 3;                   /* Coloca este bloque en tercer lugar dentro del menú */
+    }
+
+    .menu-nav.abierto {
+        display: flex;              /* Muestra la navegación cuando tiene la clase "abierto" */
+    }
+
+    .acciones-laterales {
+        display: none;              /* Oculta las acciones por defecto */
+        width: 100%;                /* Ancho completo */
+        order: 4;                   /* Cuarto lugar en el orden */
+        margin-top: 0;              /* Quita margen superior */
+    }
+
+    .acciones-laterales.abierto {
+        display: flex;              /* Muestra las acciones cuando está abierto */
+    }
+
+    .frase-motivacional {
+        display: none;              /* Oculta la frase motivacional en tablets */
+    }
+
+    .apartadoDerecho {
+        padding: 25px;              /* Reduce el relleno del contenido derecho */
+    }
+
+    .formulario {
+        grid-template-columns: 1fr; /* Una sola columna: campos apilados */
+    }
+
+    .campo.boton-agregar {
+        grid-column: auto;          /* El botón ya no ocupa una columna especial */
+    }
+
+    #btnAgregar {
+        width: 100%;                /* El botón ocupa todo el ancho */
+    }
+
+    .fila-filtros {
+        flex-direction: column;     /* Filtros y contadores apilados */
+        align-items: stretch;       /* Estiran todo el ancho */
+    }
+
+    .botones-filtro {
+        width: 100%;                /* Botones de filtro a todo el ancho */
+    }
+
+    .contadores {
+        width: 100%;                /* Contadores a todo el ancho */
+        flex-wrap: wrap;            /* Permite que salten de línea */
+    }
+}
+
+/* =========================================
+   26. RESPONSIVE PARA CELULARES (≤767px)
+========================================= */
 
 @media (max-width: 767px) {
-    .menu-nav { display: none; }
-    .header-derecho h2 { font-size: 22px; }
-    .formulario { grid-template-columns: 1fr; }
-    .fila-filtros { flex-direction: column; align-items: stretch; }
-    .botones-filtro { justify-content: space-between; }
-    .filtro-btn { flex: 1; text-align: center; padding: 10px 5px; font-size: 12px; min-width: 0; }
-    .contadores { justify-content: space-between; }
-    .contador-box { flex: 1; padding: 8px 10px; min-width: 0; }
-    .listaLibros > div { flex-direction: column; align-items: flex-start; gap: 10px; }
-    .libro-fecha { margin-left: 35px; margin-right: 0; }
-    .libro-acciones { align-self: flex-end; }
+
+    .menu {
+        padding: 15px;              /* Reduce el relleno del menú */
+    }
+
+    .menu h3 {
+        font-size: 18px;            /* Título más pequeño (18px) */
+    }
+
+    .apartadoDerecho {
+        padding: 15px;              /* Reduce el relleno del contenido */
+    }
+
+    .header-derecho h2 {
+        font-size: 22px;            /* Título más pequeño (22px) */
+    }
+
+    fieldset {
+        padding: 15px;              /* Reduce el relleno de los cuadros de sección */
+    }
+
+    .formulario {
+        grid-template-columns: 1fr; /* Una columna en móvil */
+    }
+
+    .fila-filtros {
+        flex-direction: column;     /* Filtros apilados */
+        align-items: stretch;       /* Estiran todo el ancho */
+    }
+
+    .botones-filtro {
+        flex-direction: column;     /* Botones de filtro en columna */
+        gap: 8px;                   /* Separación de 8px */
+    }
+
+    .filtro-btn {
+        width: 100%;                /* Botón de filtro a todo el ancho */
+        min-width: 0;               /* Quita el ancho mínimo */
+        text-align: left;           /* Texto alineado a la izquierda */
+        padding: 10px;              /* Relleno uniforme */
+    }
+
+    .contadores {
+        display: flex;              /* Contadores en fila */
+        justify-content: space-between; /* Distribuye el espacio entre ellos */
+        gap: 8px;                   /* Separación de 8px */
+    }
+
+    .contador-box {
+        flex: 1;                    /* Cada contador ocupa la misma proporción */
+        min-width: 0;               /* Evita desbordamiento */
+        padding: 8px 5px;           /* Relleno compacto */
+    }
+
+    .listaLibros > div {
+        flex-direction: column;     /* Cada tarjeta de libro en columna */
+        align-items: stretch;       /* Estira al ancho completo */
+        gap: 10px;                  /* Separación de 10px entre elementos */
+    }
+
+    .libro-fecha {
+        margin-left: 35px;          /* Sangría izquierda (alineada con el texto) */
+        margin-right: 0;            /* Quita el margen derecho */
+    }
+
+    .libro-acciones {
+        align-self: flex-end;       /* Alinea el botón de eliminar a la derecha */
+    }
+
+    .icono-usuario {
+        width: 40px;                /* Icono de usuario más pequeño */
+        height: 40px;               /* Alto de 40px */
+    }
 }

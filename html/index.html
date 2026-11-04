@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -9,15 +10,17 @@
 <body class="body">
 
   <main class="app">
-
-    <!-- ========== COLUMNA IZQUIERDA: MENÚ ========== -->
+    
     <aside class="menu">
+
+      <button id="menuBtn" type="button" aria-label="Abrir menú">☰</button>
+
       <div class="logo-area">
         <div class="logo-icon">📚</div>
         <h3>Mi Biblioteca</h3>
         <p class="subtitulo">Organiza tus libros</p>
       </div>
-      
+
       <nav class="menu-nav">
         <button class="activo">📑 Todos los libros</button>
         <button>🕒 Por leer</button>
@@ -34,12 +37,11 @@
         <p>“</p>
         <p>Un lector vive mil vidas antes de morir.</p>
       </div>
+
     </aside>
 
-    <!-- ========== COLUMNA DERECHA ========== -->
     <section class="apartadoDerecho">
-      
-      <!-- Cabecera -->
+
       <div class="header-derecho">
         <div>
           <h2>Mis Libros</h2>
@@ -48,15 +50,16 @@
         <div class="icono-usuario">👤</div>
       </div>
 
-      <!-- Formulario para agregar -->
       <fieldset class="seccion-formulario">
         <h3>Agregar nuevo libro</h3>
+
         <div class="formulario">
+
           <div class="campo">
             <label for="nombreLibro">Nombre del libro</label>
             <input id="nombreLibro" type="text" placeholder="¿Qué vas a leer?">
           </div>
-          
+
           <div class="campo">
             <label for="autor">Autor</label>
             <input id="autor" type="text" placeholder="Nombre del autor">
@@ -64,7 +67,6 @@
 
           <div class="campo">
             <label for="estadoLibro">Estado</label>
-            <!-- IMPORTANTE: El ID es estadoLibro -->
             <select id="estadoLibro">
               <option>Por leer</option>
               <option>Leyendo</option>
@@ -80,54 +82,60 @@
           <div class="campo boton-agregar">
             <button id="btnAgregar">+ Agregar</button>
           </div>
+
         </div>
       </fieldset>
 
-      <!-- Contadores y Filtros -->
       <fieldset class="seccion-filtros">
         <h3>Filtrar libros</h3>
+
         <div class="fila-filtros">
+
           <div class="botones-filtro">
             <button class="filtro-btn activo">Todos</button>
             <button class="filtro-btn">Por leer</button>
             <button class="filtro-btn">Leyendo</button>
             <button class="filtro-btn">Leídos</button>
           </div>
-          
+
           <div class="contadores">
+
             <div class="contador-box">
               <span class="numero" id="contTotal">0</span>
               <span class="label">Total</span>
             </div>
+
             <div class="contador-box">
               <span class="numero" id="contPendientes">0</span>
               <span class="label">Por leer</span>
             </div>
+
             <div class="contador-box">
               <span class="numero" id="contLeidos">0</span>
               <span class="label">Leídos</span>
             </div>
+
             <div class="contador-box">
               <span class="numero" id="contLeyendo">0</span>
               <span class="label">Leyendo</span>
             </div>
+
           </div>
         </div>
       </fieldset>
 
-      <!-- Lista de Libros -->
       <fieldset class="seccion-lista">
         <h3>Lista de libros</h3>
-        <div class="listaLibros">
-          <!-- Los libros se insertarán aquí por JS -->
-        </div>
+
+        <div class="listaLibros"></div>
+
         <div class="mensaje-vacio" style="display: none;">
           Aún no hay libros. ¡Agrega uno arriba para ver los apartados!
         </div>
       </fieldset>
 
       <footer>
-        <p>© 2024 Mi Biblioteca | Hecho por María Ibarra</p>
+        <p>© 2026 Mi Biblioteca</p>
       </footer>
 
     </section>
