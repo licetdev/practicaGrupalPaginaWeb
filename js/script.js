@@ -1,186 +1,74 @@
-/* =========================================
-   1. ELEMENTOS DEL HTML
-   Obtener los campos, botones y lista
-========================================= */
 
-const autor = document.getElementById("autor");
-const nombreLibro = document.getElementById("nombreLibro");
-const estadoLibro = document.getElementById("estadoLibro");
-const fechaLibro = document.getElementById("fechaLibro");
+// ELEMENTOS DEL HTML
+const $ = selector => document.querySelector(selector);
+const $$ = selector => document.querySelectorAll(selector);
 
-const btnAgregar = document.getElementById("btnAgregar");
-const listaLibros = document.querySelector(".listaLibros");
-const mensajeVacio = document.querySelector(".mensaje-vacio");
+const autor = $("#autor");
+const nombreLibro = $("#nombreLibro");
+const estadoLibro = $("#estadoLibro");
+const fechaLibro = $("#fechaLibro");
+const listaLibros = $(".listaLibros");
+const mensajeVacio = $(".mensaje-vacio");
 
+const contadores = {
+    total: $("#contTotal"),
+    pendientes: $("#contPendientes"),
+    leidos: $("#contLeidos"),
+    leyendo: $("#contLeyendo")
+};
 
-/* =========================================
-   2. CONTADORES DE LIBROS
-   Obtener los elementos de los contadores
-========================================= */
-
-const contTotal = document.getElementById("contTotal");
-const contPendientes = document.getElementById("contPendientes");
-const contLeidos = document.getElementById("contLeidos");
-const contLeyendo = document.getElementById("contLeyendo");
-
-
-/* =========================================
-   3. BOTONES PARA FILTRAR
-   Seleccionar los botones de filtros
-========================================= */
-
-const botonesFiltro = document.querySelectorAll(".filtro-btn");
-
-
-/* =========================================
-   4. VARIABLES PRINCIPALES
-   Guardar libros y controlar el filtro
-========================================= */
-
-let libros = [];
+// DATOS
+let libros = JSON.parse(localStorage.getItem("biblioteca")) || [];
 let filtroActual = "Todos";
 
-
-/* =========================================
-   5. GUARDAR Y CARGAR LIBROS
-   Guardar los datos en el navegador
-========================================= */
-
+// GUARDAR LIBROS
 function guardarLibros() {
     localStorage.setItem("biblioteca", JSON.stringify(libros));
 }
 
-function cargarLibros() {
-    const datos = localStorage.getItem("biblioteca");
-
-    if (datos !== null) {
-        libros = JSON.parse(datos);
-    }
-}
-
-
-/* =========================================
-   6. AGREGAR LIBRO
-   Validar los campos y registrar un libro
-========================================= */
-
-btnAgregar.addEventListener("click", function (e) {
-    e.preventDefault();
-
-    if (autor.value.trim() === "" || nombreLibro.value.trim() === "") {
+// AGREGAR LIBRO
+function agregarLibro() {
+    if (![autor, nombreLibro, fechaLibro].every(campo => campo.value.trim())) {
         alert("Completa todos los campos.");
         return;
     }
 
-    const libro = {
+    libros.push({
+        id: Date.now(),
         autor: autor.value.trim(),
         nombre: nombreLibro.value.trim(),
         estado: estadoLibro.value,
-        fecha: fechaLibro.value || "Sin fecha"
-    };
+        fecha: fechaLibro.value
+    });
 
-    libros.push(libro);
     guardarLibros();
-
-
-    /* =====================================
-       7. LIMPIAR FORMULARIO
-       Borrar los campos después de agregar
-    ===================================== */
-
-    autor.value = "";
-    nombreLibro.value = "";
-    fechaLibro.value = "";
+    $("#btnAgregar").form?.reset();
+    autor.value = nombreLibro.value = fechaLibro.value = "";
     estadoLibro.value = "Por leer";
 
     mostrarLibros();
-});
+}
 
+// FILTRAR LIBROS
+function filtrarLibros() {
+    return libros.filter(libro =>
+        filtroActual === "Todos" || libro.estado === filtroActual
+    );
+}
 
-/* =========================================
-   8. MOSTRAR LIBROS
-   Actualizar la lista en pantalla
-========================================= */
+// LISTAR LIBROS
+function listarLibros(librosMostrar) {
+    listaLibros.replaceChildren();
 
-function mostrarLibros() {
-    listaLibros.innerHTML = "";
-
-
-    /* =====================================
-       9. FILTRAR LIBROS
-       Mostrar libros según su estado
-    ===================================== */
-
-    let librosMostrar = libros;
-
-    if (filtroActual === "Por leer") {
-        librosMostrar = libros.filter(libro => libro.estado === "Por leer");
-
-    } else if (filtroActual === "Leyendo") {
-        librosMostrar = libros.filter(libro => libro.estado === "Leyendo");
-
-    } else if (filtroActual === "Leídos") {
-        librosMostrar = libros.filter(libro => libro.estado === "Leído");
-    }
-
-
-    /* =====================================
-       10. MENSAJE DE LISTA VACÍA
-       Mostrar aviso cuando no hay libros
-    ===================================== */
-
-    if (librosMostrar.length === 0) {
-        mensajeVacio.style.display = "block";
-
-        if (libros.length === 0) {
-            mensajeVacio.textContent = "Aún no hay libros. ¡Agrega uno arriba para ver los apartados!";
-        } else {
-            mensajeVacio.textContent = "No hay libros en este filtro.";
-        }
-
-    } else {
-        mensajeVacio.style.display = "none";
-    }
-
-
-    /* =====================================
-       11. CREAR TARJETAS DE LIBROS
-       Crear un cuadro para cada libro
-    ===================================== */
-
-    librosMostrar.forEach(function (libro) {
+    librosMostrar.forEach(libro => {
         const tarjeta = document.createElement("div");
-
-
-        /* =================================
-           12. FORMATO DE FECHA
-           Mostrar la fecha como día/mes/año
-        ================================= */
-
-        let fechaMostrar = libro.fecha;
-
-        if (libro.fecha !== "Sin fecha") {
-            const partes = libro.fecha.split("-");
-
-            if (partes.length === 3) {
-                fechaMostrar = `${partes[2]}/${partes[1]}/${partes[0]}`;
-            }
-        }
-
-
-        /* =================================
-           13. INFORMACIÓN DEL LIBRO
-           Mostrar nombre, autor, estado,
-           fecha y botón eliminar
-        ================================= */
-
         const info = document.createElement("div");
-        info.className = "libro-info";
-
         const icono = document.createElement("div");
-        icono.className = "libro-icono";
-
         const texto = document.createElement("div");
+
+        tarjeta.className = "tarjeta-libro";
+        info.className = "libro-info";
+        icono.className = "libro-icono";
         texto.className = "libro-texto";
 
         const titulo = document.createElement("h4");
@@ -194,217 +82,103 @@ function mostrarLibros() {
         estado.classList.add("estado-" + libro.estado.replace(" ", "."));
         estado.textContent = libro.estado;
 
-        texto.appendChild(titulo);
-        texto.appendChild(autorTexto);
-        texto.appendChild(estado);
-
-        info.appendChild(icono);
-        info.appendChild(texto);
-
         const fecha = document.createElement("div");
         fecha.className = "libro-fecha";
-        fecha.textContent = "📅 " + fechaMostrar;
+        fecha.textContent = "📅 " + (libro.fecha === "Sin fecha"
+            ? libro.fecha
+            : libro.fecha.split("-").reverse().join("/"));
 
         const acciones = document.createElement("div");
         acciones.className = "libro-acciones";
 
+        const boton = document.createElement("button");
+        boton.className = "btn-eliminar";
+        boton.textContent = "🗑️";
+        boton.title = "Eliminar";
+        boton.addEventListener("click", () => eliminarLibro(libro.id));
 
-        /* =================================
-           14. BOTÓN ELIMINAR
-           Detectar el clic para borrar
-           un libro de la lista
-        ================================= */
-
-        const btnEliminar = document.createElement("button");
-        btnEliminar.className = "btn-eliminar";
-        btnEliminar.title = "Eliminar";
-        btnEliminar.textContent = "🗑️";
-
-        btnEliminar.addEventListener("click", function () {
-            eliminarLibro(libro);
-        });
-
-        acciones.appendChild(btnEliminar);
-
-        tarjeta.appendChild(info);
-        tarjeta.appendChild(fecha);
-        tarjeta.appendChild(acciones);
-
+        texto.append(titulo, autorTexto, estado);
+        info.append(icono, texto);
+        acciones.appendChild(boton);
+        tarjeta.append(info, fecha, acciones);
         listaLibros.appendChild(tarjeta);
     });
 
+    mensajeVacio.hidden = librosMostrar.length > 0;
+    mensajeVacio.textContent = libros.length
+        ? "No hay libros en este filtro."
+        : "Aún no hay libros. ¡Agrega uno arriba para ver los apartados!";
+}
+
+// ACTUALIZAR CONTADORES
+function actualizarContadores() {
+    contadores.total.textContent = libros.length;
+    contadores.pendientes.textContent = libros.filter(l => l.estado === "Por leer").length;
+    contadores.leyendo.textContent = libros.filter(l => l.estado === "Leyendo").length;
+    contadores.leidos.textContent = libros.filter(l => l.estado === "Leído").length;
+}
+
+// MOSTRAR LIBROS
+function mostrarLibros() {
+    listarLibros(filtrarLibros());
     actualizarContadores();
 }
 
-
-/* =========================================
-   15. ACTUALIZAR CONTADORES
-   Calcular la cantidad de libros por estado
-========================================= */
-
-function actualizarContadores() {
-    const total = libros.length;
-    const leidos = libros.filter(libro => libro.estado === "Leído").length;
-    const pendientes = libros.filter(libro => libro.estado === "Por leer").length;
-    const leyendo = libros.filter(libro => libro.estado === "Leyendo").length;
-
-    contTotal.textContent = total;
-    contPendientes.textContent = pendientes;
-    contLeidos.textContent = leidos;
-    contLeyendo.textContent = leyendo;
-}
-
-
-/* =========================================
-   16. ELIMINAR UN LIBRO
-   Borrar el libro seleccionado
-========================================= */
-
-function eliminarLibro(libroEliminar) {
-    libros = libros.filter(function (libro) {
-        return libro !== libroEliminar;
-    });
-
+// ELIMINAR LIBRO
+function eliminarLibro(id) {
+    libros = libros.filter(libro => libro.id !== id);
     guardarLibros();
     mostrarLibros();
 }
 
+// FILTROS SUPERIORES Y MENÚ LATERAL
+function seleccionarFiltro(valor, boton) {
+    filtroActual = valor.includes("Todos") ? "Todos" :
+        valor.includes("Por leer") ? "Por leer" :
+        valor.includes("Leyendo") ? "Leyendo" : "Leído";
 
-/* =========================================
-   17. FILTROS SUPERIORES
-   Cambiar los libros que se muestran
-   cuando se selecciona un filtro
-========================================= */
+    $$(".filtro-btn, .menu-nav button").forEach(b => b.classList.remove("activo"));
+    boton.classList.add("activo");
 
-botonesFiltro.forEach(function (boton) {
-    boton.addEventListener("click", function () {
+    const filtro = [...$$(".filtro-btn")].find(b =>
+        (b.textContent.trim() === "Leídos" ? "Leído" : b.textContent.trim()) === filtroActual
+    );
 
-        botonesFiltro.forEach(b => b.classList.remove("activo"));
-        this.classList.add("activo");
+    filtro?.classList.add("activo");
+    mostrarLibros();
+}
 
-        filtroActual = this.textContent.trim();
-        mostrarLibros();
-    });
-});
+// EVENTOS DE FILTROS
+$$(".filtro-btn, .menu-nav button").forEach(boton =>
+    boton.addEventListener("click", () => {
+        seleccionarFiltro(boton.textContent.trim(), boton);
+        $(".menu-nav").classList.remove("abierto");
+        $(".acciones-laterales").classList.remove("abierto");
+    })
+);
 
-
-/* =========================================
-   18. MENÚ LATERAL
-   Controlar los botones del menú izquierdo
-========================================= */
-
-const botonesMenu = document.querySelectorAll(".menu-nav button, .btn-lateral");
-
-botonesMenu.forEach(function (boton) {
-    boton.addEventListener("click", function () {
-        const opcion = boton.textContent.trim();
-
-
-        /* =================================
-           19. QUITAR LIBROS LEÍDOS
-           Eliminar todos los libros leídos
-        ================================= */
-
-        if (opcion === "Quitar leídos") {
-            libros = libros.filter(libro => libro.estado !== "Leído");
-
-            guardarLibros();
-            mostrarLibros();
-
-
-        /* =================================
-           20. VACIAR BIBLIOTECA
-           Eliminar todos los libros
-           después de confirmar
-        ================================= */
-
-        } else if (opcion === "Vaciar biblioteca") {
-
-            if (confirm("¿Estás seguro de que quieres vaciar la biblioteca?")) {
-                libros = [];
-                guardarLibros();
-                mostrarLibros();
-            }
-
-
-        /* =================================
-           21. FILTROS DEL MENÚ LATERAL
-           Seleccionar los libros por estado
-        ================================= */
-
-        } else if (
-            opcion.includes("Todos") ||
-            opcion.includes("Por leer") ||
-            opcion.includes("Leyendo") ||
-            opcion.includes("Leídos")
-        ) {
-
-            let filtro = opcion.replace(/^[^a-zA-ZÁÉÍÓÚáéíóú]+/, '').trim();
-
-            if (filtro === "Todos los libros") filtro = "Todos";
-
-            filtroActual = filtro;
-
-
-            /* =============================
-               22. ACTIVAR FILTRO
-               Resaltar el botón seleccionado
-            ============================= */
-
-            botonesFiltro.forEach(b => {
-                b.classList.remove("activo");
-
-                if (b.textContent.trim() === filtro) {
-                    b.classList.add("activo");
-                }
-            });
-
-            document.querySelectorAll(".menu-nav button").forEach(b => {
-                b.classList.remove("activo");
-            });
-
-            if (boton.closest(".menu-nav")) {
-                boton.classList.add("activo");
-            }
-
-            mostrarLibros();
+// QUITAR LEÍDOS Y VACIAR BIBLIOTECA
+$$(".btn-lateral").forEach(boton =>
+    boton.addEventListener("click", () => {
+        if (boton.textContent.includes("Quitar")) {
+            libros = libros.filter(l => l.estado !== "Leído");
+        } else if (confirm("¿Estás seguro de vaciar la biblioteca?")) {
+            libros = [];
+        } else {
+            return;
         }
-    });
+
+        guardarLibros();
+        mostrarLibros();
+    })
+);
+
+// MENÚ RESPONSIVE
+$("#menuBtn").addEventListener("click", () => {
+    $(".menu-nav").classList.toggle("abierto");
+    $(".acciones-laterales").classList.toggle("abierto");
 });
 
-
-/* =========================================
-   23. INICIAR LA APLICACIÓN
-   Cargar y mostrar los libros guardados
-========================================= */
-
-cargarLibros();
+// INICIAR APLICACIÓN
+$("#btnAgregar").addEventListener("click", agregarLibro);
 mostrarLibros();
-
-
-/* =========================================
-   24. MENÚ RESPONSIVE
-   Abrir y cerrar el menú en tablet y celular
-========================================= */
-
-const menuBtn = document.getElementById("menuBtn");
-const menuNav = document.querySelector(".menu-nav");
-const accionesLaterales = document.querySelector(".acciones-laterales");
-
-menuBtn.addEventListener("click", function () {
-    menuNav.classList.toggle("abierto");
-    accionesLaterales.classList.toggle("abierto");
-});
-
-
-/* =========================================
-   25. CERRAR MENÚ AL SELECCIONAR
-   Cerrar el menú después de elegir un filtro
-========================================= */
-
-menuNav.querySelectorAll("button").forEach(function (boton) {
-    boton.addEventListener("click", function () {
-        menuNav.classList.remove("abierto");
-        accionesLaterales.classList.remove("abierto");
-    });
-});
